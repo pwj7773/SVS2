@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<title>[내 회원 정보]</title>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/styles.css" rel="stylesheet" />
+<style>
+/*.col-lg-3.col-md-4.label {
+  width: 15%;
+}
+.col-lg-9.col-md-8 {
+	width: 30%;
+}*/
+</style>
+</head>
+<body>
+<section layout:fragment="content">
+<div class="card-body pt-3 px-4" style="width: 30%;">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" style="font-weight: bold;">내 정보</h4>
+    </div>
+    
+    <div class="px-4"><br>
+    
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label" style="color: #9285AE;">아이디</div>
+      <div class="col-lg-9 col-md-8"><span th:text="${member.userId}"></span></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label" style="color: #9285AE;">이름</div>
+      <div class="col-lg-9 col-md-8"><span th:text="${member.userName}"></span></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label" style="color: #9285AE;">이메일</div>
+      <div class="col-lg-9 col-md-8"><span th:text="${member.email}"></span></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label" style="color: #9285AE;">전화번호</div>
+      <div class="col-lg-9 col-md-8"><span th:text="${member.phone}"></span></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <br>
+        <a href="/reauthenticate" class="btn btn-outline-primary">수정</a>
+      </div>
+	<br><br><br>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+</section>
+</body>
+</html>

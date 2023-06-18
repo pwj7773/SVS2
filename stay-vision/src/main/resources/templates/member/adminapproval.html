@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<title>[계정 승인 관리]</title>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/styles.css" rel="stylesheet" />
+<script>
+
+	function checkForm1() {
+		  const checkboxes 
+	       = document.getElementsByName('checkedValue1');
+		  let flag = true;
+		  checkboxes.forEach((checkbox) => {
+			  if (checkbox.checked){
+				  flag = false;
+			  }
+			  })
+		if (flag) return false;
+		if (confirm("정말 하시겠습니까?")) {
+			return true; // 폼을 서밋합니다.
+		} else {
+			return false; // 폼을 서밋하지 않습니다.
+		}
+	}
+	function checkForm2() {
+		const checkboxes 
+	       = document.getElementsByName('checkedValue2');
+		  let flag = true;
+		  checkboxes.forEach((checkbox) => {
+			  if (checkbox.checked){
+				  flag = false;
+			  }
+			  })
+		if (flag) return false;
+		if (confirm("정말 하시겠습니까?")) {
+			return true; // 폼을 서밋합니다.
+		} else {
+			return false; // 폼을 서밋하지 않습니다.
+		}
+	}
+	
+	function selectAll1(selectAll1)  {
+		  const checkboxes 
+		       = document.getElementsByName('checkedValue1');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll1.checked;
+		  })
+		}
+	
+	function selectAll2(selectAll2)  {
+		  const checkboxes 
+		       = document.getElementsByName('checkedValue2');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll2.checked;
+		  })
+		}
+	
+	function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+      }
+
+	window.onload = function() {
+		  document.getElementById("defaultOpen").click();
+		};
+
+</script>
+<style>
+      /* 탭 버튼 스타일 */
+      .tab button {
+        background-color: #f2f2f2;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        font-size: 18px;
+        width: 15%;
+        border-radius: 8px 8px 0 0;
+      }
+      
+      /* 선택된 탭 버튼 스타일 */
+      .tab button.active {
+        background-color: #ccc;
+      }
+      
+      /* 탭 내용 스타일 */
+      .tabcontent {
+        display: none;
+        padding: 50px;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 8px 8px 8px;
+      }
+      
+      /* 선택된 탭 내용 스타일 */
+      .tabcontent.active {
+        display: block;
+      }
+      
+		.container-custom {
+			padding: 100px;
+		}
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+		<!-- Page content-->
+	<div class="container center pt-4">
+	<div class="px-3">
+	<div class="d-flex tab">
+      <button class="tablinks fs-5" onclick="openTab(event, 'tab1')" id="defaultOpen">회원 목록</button>
+      <button class="tablinks fs-5" onclick="openTab(event, 'tab2')">승인 대기 목록</button>
+    </div>
+    <div id="tab1" class="tabcontent active">
+    	<h3>회원 목록</h3>
+		<form action="memberdelete" method="post" onsubmit="return checkForm1();">
+			<table class="table table-hover">
+				<tr>
+					<th>아이디 (이름)</th>
+					<th>사용자 등급</th>
+					<td>
+						<input type="checkbox" name="checkedValue1" value="" onclick="selectAll1(this)">
+					</td>
+				</tr>
+				<tr th:each = "m : ${mlist}">
+					<td>
+				      <span th:text="${m.userId}"></span>
+				      <span>(</span>
+				      <span th:text="${m.userName}"></span>
+				      <span>)</span>
+				    </td>
+				    <td>
+						<span th:if="${m.roleName.toString == 'ROLE_ADMIN'}">관리자</span>
+		        		<span th:if="${m.roleName.toString == 'ROLE_EMP'}">직원</span>
+		        		<span th:if="${m.roleName.toString == 'ROLE_USER'}">사용자</span>
+		        	</td>
+		        	<td th:if="${m.roleName.toString != 'ROLE_ADMIN'}">
+		        		<input type="checkbox" th:value="${m.userId}" name="checkedValue1">
+		        	</td>
+		        	<td th:if="${m.roleName.toString == 'ROLE_ADMIN'}"></td>
+				</tr>
+			</table>
+					<input type="submit" value="삭제" name="delete" class="btn btn-secondary">
+					<input type="submit" value="비활성화" name="disabled" class="btn btn-secondary">
+		</form>
+    </div>
+	<div id="tab2" class="tabcontent">
+		<h3>가입 승인 대기 목록</h3>
+		<h5>(비활성화 계정 목록)</h5>
+		<form action="adminapproval" method="post" onsubmit="return checkForm2();">
+			<table class="table table-hover">
+				<tr>
+					<th>아이디 (이름)</th>
+					<th>요청 등급</th>
+					<td>
+						<input type="checkbox" name="checkedValue2" value="" onclick="selectAll2(this)">
+					</td>
+				</tr>
+				<tr th:each = "s : ${slist}">
+					<td>
+				      <span th:text="${s.userId}"></span>
+				      <span>(</span>
+				      <span th:text="${s.userName}"></span>
+				      <span>)</span>
+				    </td>
+					<td>
+						<span th:if="${s.roleName.toString == 'ROLE_ADMIN'}">관리자</span>
+	        			<span th:if="${s.roleName.toString == 'ROLE_EMP'}">직원</span>
+	        			<span th:if="${s.roleName.toString == 'ROLE_USER'}">사용자</span>
+	        		</td>
+					<td>
+						<input type="checkbox" th:value="${s.userId}" name="checkedValue2">
+					</td>
+				</tr>
+			</table>
+			<input type="submit" name="approval" value="승인" class="btn btn-secondary">
+			<input type="submit" name="refuse" id="refuse" value="거절" class="btn btn-secondary">
+		</form>
+	</div>
+	</div>
+	</div>
+</section>
+</body>
+</html>

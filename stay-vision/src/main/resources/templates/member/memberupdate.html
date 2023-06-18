@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<title>[회원 수정]</title>
+<script>
+	// 회원가입 입력창 검증하는 함수
+	// 유효하면 -> 서버로 보냄 아니면 -> 여기서 머무름
+	function checkValue() {
+		// ID가 비어있거나 3~10자가 아니면 무효
+		// 비밀번호가 비어있거나 4~8글자가 아니면 무효
+		// 비밀번호 입력창과 비밀번호 확인창의 값이 다르면 무효
+		// 이름이 없거나 한글자, 7자이상 무효
+		// 이름에 숫자 들어있으면 무효
+		// 이메일이 비어있으면 무효
+		let userIdValue = document.getElementById("userId").value;
+		let pw1Value = document.getElementById("pw1").value;
+		let pw2Value = document.getElementById("pw2").value;
+		let nameValue = document.getElementById("name").value;
+		let emailValue = document.getElementById("email").value;
+		let phoneValue = document.getElementById("phone").value;
+		
+		let namesplit = nameValue.split("");
+		
+		
+		if (userIdValue === '' || userIdValue.length < 3 || userIdValue > 10) {
+			alert("잘못된 아이디입니다.");
+			document.getElementById("userId").focus(); 
+			return false;
+		}
+		
+		if (pw1Value === '' || pw1Value.length < 4 || pw1Value.length > 15) {
+			alert("비밀번호는 4자이상 15자 이하입니다.");
+			document.getElementById("pw1").focus(); 
+			return false;
+		}
+		
+		if (pw2Value !== pw1Value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			document.getElementById("pw2").focus(); 
+			return false;
+		}
+		
+		if (nameValue === '' || nameValue.length == 1 || nameValue.length > 7) {
+			alert("잘못된 이름입니다.");
+			document.getElementById("name").focus(); 
+			return false;
+		}
+		
+		for(let i = 0; i < namesplit.length; i++) {
+			if(!isNaN(namesplit[i])) {
+				alert("이름에는 숫자가 입력되지 않습니다.");
+				document.getElementById("name").focus(); 
+				return false;
+			}	
+		}
+		
+		if (emailValue === '') {
+			alert("이메일을 입력하세요.");
+			document.getElementById("email").focus();
+			return false;
+		}
+		
+		if (phoneValue === '') {
+			alert("전화번호를 입력하세요.");
+			document.getElementById("phone").focus();
+			return false;
+		}
+		
+	}
+	
+</script>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/styles.css" rel="stylesheet" />
+<style>
+	.col-md-4.col-lg-3.col-form-label {
+	  text-align: center;
+	  font-size: 14px;
+	  font-weight: bolder;
+	}
+/*	
+	.col-md-8.col-lg-9 {
+		width: 30%;
+	}
+*/
+
+</style>
+</head>
+<body>
+<section layout:fragment="content">
+<div class="pt-3 px-4">
+	<div class="card" style="width:35%;">
+	<!-- Profile Edit Form -->
+	<div class="card-header">
+	<h4 style="font-weight: bold;">회원정보 수정</h4>
+	</div>
+	<br>
+	<form action="/memberupdate" method="post" onsubmit = "return checkValue()">
+	
+	  <div class="row mb-3">
+	    <label for="id" class="col-md-4 col-lg-3 col-form-label">아이디</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input name="userId" type="text" class="form-control" id="userId" th:value="${member.userId}" readonly="readonly">
+	    </div>
+	  </div>
+	  
+	  <div class="row mb-3">
+	    <label for="pw1" class="col-md-4 col-lg-3 col-form-label">비밀번호</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input name="userPw" type="password" class="form-control" id = "pw1" placeholder="비밀번호를 입력하세요">
+	    </div>
+	  </div>
+	  
+	  <div class="row mb-3">
+	    <label for="pw2" class="col-md-4 col-lg-3 col-form-label">비밀번호 확인</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input type="password" class="form-control" id = "pw2" placeholder="비밀번호를 입력하세요">
+	    </div>
+	  </div>
+	
+	  <div class="row mb-3">
+	    <label for="name" class="col-md-4 col-lg-3 col-form-label">이름</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input name="userName" type="text" class="form-control" id="name" th:value="${member.userName}">
+	    </div>
+	  </div>
+
+	  <div class="row mb-3">
+	    <label for="email" class="col-md-4 col-lg-3 col-form-label">이메일</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input name="email" type="email" class="form-control" id="email" th:value="${member.email}">
+	    </div>
+	  </div>
+	
+	  <div class="row mb-3">
+	    <label for="phone" class="col-md-4 col-lg-3 col-form-label">전화번호</label>
+	    <div class="col-md-8 col-lg-9">
+	      <input name="phone" type="text" class="form-control" id="phone" th:value="${member.phone}">
+	    </div>
+	  </div>	
+		
+	  <div class="" style="text-align: right;">
+	    <button type="submit" class="btn btn-outline-primary">수정</button>
+	  	<span>&nbsp;&nbsp;&nbsp;</span><br><br>
+	  </div>
+	</form><!-- End Profile Edit Form -->
+	</div>
+</div>
+</section>
+</body>
+</html>
