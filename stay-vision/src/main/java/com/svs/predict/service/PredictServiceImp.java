@@ -33,17 +33,16 @@ public class PredictServiceImp implements PredictService {
 		Map<String, Object> map = null;					// 정상 반환시 
 		
 		try {
-			Map<String, Integer> parameters = new HashMap<>();
+			Map<String, String> parameters = new HashMap<>();
 			
 			// 서버로 보낼 데이터(쿼리스트링) 준비
+			parameters.put("platform", reservation.getPlatform());
 			parameters.put("name", reservation.getName());
-			parameters.put("person", reservation.getPerson());
-			parameters.put("weight", reservation.getWeight());
 			parameters.put("address", reservation.getAddress());
-			parameters.put("isWeek", reservation.getIsWeek());
-			parameters.put("saturday", reservation.getSaturday());
-			parameters.put("days", reservation.getDays());
-			parameters.put("month", reservation.getMonth());
+			parameters.put("room", reservation.getRoom());
+			parameters.put("checkIn", reservation.getCheckIn());
+			parameters.put("checkOut", reservation.getCheckOut());
+			
 	
 			// 헤더 준비
 			HttpHeaders headers = new HttpHeaders();
