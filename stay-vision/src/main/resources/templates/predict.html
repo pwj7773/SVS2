@@ -12,28 +12,24 @@
 <link href="/css/styles.css" rel="stylesheet" />
 <script>
 	$(function(){
-		$("#btn").on('click', predict)
+		$("#btn").on('click', predict);
 	})
 	
 	function predict() {
+        let platform = $("#platform").val();
         let name = $("#name").val();
-        let person = $("#person").val();
-        let weight = $("#weight").val();
         let address = $("#address").val();
-        let isWeek = $("#isWeek").val();
-        let saturday = $("#saturday").val();
-        let days = $("#days").val();
-        let month = $("#month").val();
+        let room = $("#room").val();
+        let checkIn = $("#checkIn").val();
+        let checkOut = $("#checkOut").val();
 		
 		let sendData = {
-		    'name': name,
-		    'person': person,
-		    'weight': weight,
-		    'address': address,
-		    'isWeek': isWeek,
-		    'saturday': saturday,
-		    'days': days,
-		    'month': month
+			    'platform': platform,
+			    'name': name,
+			    'address': address,
+			    'room': room,
+			    'checkIn': checkIn,
+			    'checkOut': checkOut
 		}
 		// alert(JSON.stringify(sendData));
 		$.ajax({
@@ -55,22 +51,18 @@
 				<h2>[ 숙박업소 가격예측 ]</h2>
 				<form>
 					<ul>
-						<li><label for="petalLength">펜션 이름</label> <input type="text"
+						<li><label for="petalLength">플랫폼</label> <input type="text"
+							id="platform" name="platform"></li>
+						<li><label for="petalLength">이름</label> <input type="text"
 							id="name" name="name"></li>
-						<li><label for="petalLength">최대인원</label> <input type="text"
-							id="person" name="person"></li>
-						<li><label for="petalLength">객실상세 가중치</label> <input
-							type="text" id="weight" name="weight"></li>
 						<li><label for="petalLength">주소</label> <input type="text"
 							id="address" name="address"></li>
-						<li><label for="petalLength">주말포함여부</label> <input
-							type="text" id="isWeek" name="isWeek"></li>
-						<li><label for="petalLength">토요일체크아웃여부</label> <input
-							type="text" id="saturday" name="saturday"></li>
-						<li><label for="petalLength">숙박일</label> <input type="text"
-							id="days" name="days"></li>
-						<li><label for="petalLength">해당월</label> <input type="text"
-							id="month" name="month"></li>
+						<li><label for="petalLength">방</label> <input type="text"
+							id="room" name="room"></li>
+						<li><label for="petalLength">체크인</label> <input type="text"
+							id="checkIn" name="checkIn"></li>
+						<li><label for="petalLength">체크아웃</label> <input type="text"
+							id="checkOut" name="checkOut"></li>
 
 						<li><input type="button" id="btn" value="분류하기"></li>
 					</ul>
