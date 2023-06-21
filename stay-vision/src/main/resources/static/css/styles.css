@@ -10899,3 +10899,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   white-space: nowrap;
   max-width: 40vw; /* 최대 너비 지정 */
 }
+.vertical-line {
+  height: 100%;
+}
+
