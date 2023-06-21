@@ -34,29 +34,25 @@
 <link href="/css/predict.css" rel="stylesheet" />
 
 <script>
-	$(function() {
-		$("#btn").on('click', predict)
+	$(function(){
+		$("#btn").on('click', predict);
 	})
 
 	function predict() {
-		let name = $("#name").val();
-		let person = $("#person").val();
-		let weight = $("#weight").val();
-		let address = $("#address").val();
-		let isWeek = $("#isWeek").val();
-		let saturday = $("#saturday").val();
-		let days = $("#days").val();
-		let month = $("#month").val();
-
+        let platform = $("#platform").val();
+        let name = $("#name").val();
+        let address = $("#address").val();
+        let room = $("#room").val();
+        let checkIn = $("#checkIn").val();
+        let checkOut = $("#checkOut").val();
+		
 		let sendData = {
-			'name' : name,
-			'person' : person,
-			'weight' : weight,
-			'address' : address,
-			'isWeek' : isWeek,
-			'saturday' : saturday,
-			'days' : days,
-			'month' : month
+			    'platform': platform,
+			    'name': name,
+			    'address': address,
+			    'room': room,
+			    'checkIn': checkIn,
+			    'checkOut': checkOut
 		}
 		// alert(JSON.stringify(sendData));
 		$.ajax({
@@ -74,7 +70,6 @@
 <body>
 	<section layout:fragment="content">
 		<div class="container-fluid p-4 custom-container">
-
 			<div class="row" style="padding: 50px;">
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<!-- 좌측 내용 -->

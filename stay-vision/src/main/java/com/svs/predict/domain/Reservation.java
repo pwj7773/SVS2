@@ -11,13 +11,11 @@ import lombok.ToString;
 @Setter @Getter
 @ToString
 public class Reservation {
-    private int name ;
-    private int person ;
-    private int weight ;
-    private int address ;
-    private int isWeek ;
-    private int Saturday ;
-    private int days ;
-    private int month;
+    String platform;
+    String name;
+    String address;
+    String room;
+    String checkIn;
+    String checkOut;
 
 }
