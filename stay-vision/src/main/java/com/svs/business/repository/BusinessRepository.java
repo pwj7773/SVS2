@@ -18,6 +18,8 @@ public interface BusinessRepository extends JpaRepository<Business, Long> {
 
 	Business findOneById(Long id);
 
+	Business findByBusinessName(String businessName);
+
 
 	
 }

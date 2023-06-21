@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.svs.business.domain.Business;
+import com.svs.business.domain.Room;
 import com.svs.business.service.BusinessService;
 import com.svs.predict.domain.Reservation;
 import com.svs.predict.service.PredictService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class PredictController {
@@ -33,12 +36,19 @@ public class PredictController {
 	@PostMapping("/predict")
 	@ResponseBody
 	public Map<String, Object> predict(Reservation reservation) throws JsonProcessingException {
-		
+		log.debug("{}",reservation);
 		Map<String, Object> result = null;
 		
 		result = predictService.predict(reservation);
 		
 		return result;
+	}
+	@PostMapping("/rooms")
+	@ResponseBody
+	public List<Room> rooms(String businessName){
+		Business business = businessService.findByBusinessName(businessName);
+		List<Room> rooms = businessService.findRoom(business.getId()); 
+		return rooms;
 	}
 
 }

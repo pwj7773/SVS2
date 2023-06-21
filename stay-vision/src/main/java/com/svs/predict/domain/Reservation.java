@@ -15,7 +15,6 @@ public class Reservation {
     String name;
     String address;
     String room;
-    String checkIn;
-    String checkOut;
+    String date;
 
 }

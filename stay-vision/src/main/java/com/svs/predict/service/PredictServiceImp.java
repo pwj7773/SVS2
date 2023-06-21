@@ -36,12 +36,14 @@ public class PredictServiceImp implements PredictService {
 			Map<String, String> parameters = new HashMap<>();
 			
 			// 서버로 보낼 데이터(쿼리스트링) 준비
+			String str = reservation.getDate();
+			String[] date = str.split("~");
 			parameters.put("platform", reservation.getPlatform());
 			parameters.put("name", reservation.getName());
 			parameters.put("address", reservation.getAddress());
 			parameters.put("room", reservation.getRoom());
-			parameters.put("checkIn", reservation.getCheckIn());
-			parameters.put("checkOut", reservation.getCheckOut());
+			parameters.put("checkIn", date[0]);
+			parameters.put("checkOut", date[1]);
 			
 	
 			// 헤더 준비
