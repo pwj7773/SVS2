@@ -1,0 +1,35 @@
+.card {
+	padding: 10px;
+	margin: 0px auto;
+	box-sizing: border-box;
+	border: 1px solid black;
+	
+}
+
+.card-header{
+	font-size: 25px;
+	font-weight: 900;
+}
+
+ul li {
+	list-style: none;
+	border-bottom: 2px solid #EAECEB;
+	color: #bdc3c7;
+	font-size: 16px;
+	line-height: 25px;
+	margin-bottom: 10px;
+	width: auto;
+}
+
+li label {
+	display: inline-block;
+	text-align: center;
+	width: 80px;
+	line-height: normal;
+	flex: 1;
+}
+
+input, select {
+	width: 60%
+}
+

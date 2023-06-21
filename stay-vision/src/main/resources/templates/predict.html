@@ -8,13 +8,36 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
 <script src="/js/jquery-3.6.3.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9161bd2e86767fca11d66f25f45237a&libraries=services"></script>
 <!-- Core theme CSS (includes Bootstrap)-->
+
 <link href="/css/styles.css" rel="stylesheet" />
+<link href="/css/predict.css" rel="stylesheet" />
+
 <script>
 	$(function(){
 		$("#btn").on('click', predict);
 	})
-	
+
 	function predict() {
         let platform = $("#platform").val();
         let name = $("#name").val();
@@ -33,10 +56,10 @@
 		}
 		// alert(JSON.stringify(sendData));
 		$.ajax({
-			method : 'POST'
-			, url  : 'predict'
-			, data : sendData
-			, success : function(resp) { // resp = {"predict_result" : "setosa"}
+			method : 'POST',
+			url : 'predict',
+			data : sendData,
+			success : function(resp) { // resp = {"predict_result" : "setosa"}
 				$("#result").css("color", "red");
 				$("#result").text(resp["predict_result"])
 			}
@@ -46,35 +69,50 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container-fluid p-4">
-			<div class="px-4">
-				<h2>[ 숙박업소 가격예측 ]</h2>
-				<form>
-					<ul>
-						<li><label for="petalLength">플랫폼</label> <input type="text"
-							id="platform" name="platform"></li>
-						<li><label for="petalLength">이름</label> <input type="text"
-							id="name" name="name"></li>
-						<li><label for="petalLength">주소</label> <input type="text"
-							id="address" name="address"></li>
-						<li><label for="petalLength">방</label> <input type="text"
-							id="room" name="room"></li>
-						<li><label for="petalLength">체크인</label> <input type="text"
-							id="checkIn" name="checkIn"></li>
-						<li><label for="petalLength">체크아웃</label> <input type="text"
-							id="checkOut" name="checkOut"></li>
-
-						<li><input type="button" id="btn" value="분류하기"></li>
-					</ul>
-				</form>
-				<h3>
-					분류 결과 : <span id="result"></span>
-				</h3>
-
+		<div class="container-fluid p-4 custom-container">
+			<div class="row" style="padding: 50px;">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<!-- 좌측 내용 -->
+					<div class=" card">
+						<div id="map" style="width: 100%; height: 480px;"></div>
+					</div>
+				</div>
+				<!-- 중앙공간 나누기 -->
+				<div
+					class="col-auto d-flex align-items-center justify-content-center"
+					style="margin: 0px; padding: 0px">
+					<div class="vertical-line flex-grow-0"></div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<!-- 우측 내용 -->
+					<div class="card d-flex justify-content-center"
+						style="height: 500px;">
+						<div class="card-header text-center">숙박요금 예측</div>
+						<div class="card-body">
+							<ul>
+								<li class="mb-4"><label for="petalLength">펜션 이름</label> <input
+									type="text" id="name" name="name"></li>
+								<li class="mb-4"><label for="petalLength">객실 선택</label> <select
+									id="roomSelect" name="roomSelect">
+										<option value="">객실을 선택하세요</option>
+								</select></li>
+								<li class="mb-4"><label for="petalLength">주소</label> <input
+									type="text" id="address" name="address" readonly></li>
+								<li class="mb-4"><label for="petalLength">플랫폼</label> <input
+									type="text" id="days" name="days"></li>
+								<li class="mb-4"><label for="petalLength">숙박기간</label> <input
+									type="text" id="demo" name="demo" placeholder="날짜를 선택하세요"></li>
+							</ul>
+						</div>
+						<div class="card-footer text-body-secondary text-center">
+							<input type="button" class="btn btn-primary" id="btn"
+								value="두뇌 풀가동">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
-
+		<script src=/js/predict.js></script>
 	</section>
 </body>
 </html>
