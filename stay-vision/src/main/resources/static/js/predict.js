@@ -14,18 +14,6 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도에 줌 
 
 var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
 
-var businessAddress = [
-	/*[# th:each="b : ${business}"]*/
-                /*[[${b.businessAddress}]]*/,
-	/*[/]*/
-];
-
-var businessName = [
-	/*[# th:each="b : ${business}"]*/
-            /*[[${b.businessName}]]*/,
-	/*[/]*/
-];
-
 var selectElement = document.getElementById('businessSelect');
 
 
@@ -80,36 +68,25 @@ for (var i = 0; i < businessAddress.length; i++) {
 					document.getElementById('businessNameInput').value = businessName[index];
 					document.getElementById('businessAddressInput').value = businessAddress[index];
 
-					selectElement.value = index.toString();
-					// // 셀렉트 박스 선택 변경
-					// var selectElement = document.getElementById('businessSelect');
+					$.ajax({
+						method: 'POST',
+						url: 'rooms',
+						data: { 'businessName': businessName[index] },
+						success: function(data) { // resp = {"predict_result" : "setosa"}
+
+							var selectElement = $('#roomSelect');
+							selectElement.empty();
+
+							// 데이터를 반복하여 select 요소에 옵션 추가
+							data.forEach(function(item) {
+								var option = $('<option></option>').attr('value', item.roomName).text(item.roomName);
+								selectElement.append(option);
+							});
+						}
+					});
 
 
 				});
-
-				selectElement.addEventListener('change', function() {
-					var selectedIndex = selectElement.value;
-					if (selectedIndex !== '') {
-						var index = parseInt(selectedIndex);
-						var selectedMarker = markers[index]; // 선택된 마커 가져오기
-						var selectedInfowindow = infowindows[index]; // 선택된 인포윈도우 가져오기
-
-						closeInfoWindow(); // 이미 열려있는 인포윈도우가 있을 경우 닫습니다
-
-						// 마커 위에 인포윈도우를 표시합니다
-						selectedInfowindow.open(map, selectedMarker);
-						markers.push(marker); // 마커를 배열에 추가
-						// 생성된 인포윈도우를 배열에 추가합니다
-						infowindows.push(selectedInfowindow);
-
-						// 업체 선택과 업체 주소에 값을 채웁니다
-						document.getElementById('businessNameInput').value = businessName[index];
-						document.getElementById('businessAddressInput').value = businessAddress[index];
-
-
-					}
-				});
-
 			}
 		});
 	})(i);
@@ -132,10 +109,16 @@ $('#demo').daterangepicker({
 	},
 	"startDate": new Date(),
 	"endDate": new Date(),
-	"drops": "auto"
-}, function(start, end, label) {
-	console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	"drops": "auto",
+	"maxSpan": {
+		"days": 3
+	},
+	"showDropdowns": false,
+	"showWeekNumbers": false,
+	"autoApply": true,
+
 });
+
 $('input[name="demo"]').on('apply.daterangepicker', function(ev, picker) {
 	$(this).val(picker.startDate.format('YYYY-MM-DD') + ' ~ ' + picker.endDate.format('YYYY-MM-DD'));
 });
@@ -143,3 +126,10 @@ $('input[name="demo"]').on('apply.daterangepicker', function(ev, picker) {
 $('input[name="demo2"]').on('cancel.daterangepicker', function(ev, picker) {
 	$(this).val('');
 });
+
+
+$('input[name="demo2"]').on('cancel.daterangepicker', function(ev, picker) {
+	$(this).val('');
+});
+// 두 번째 월 선택 옵션을 숨김
+$('.drp-calendar.right').hide();

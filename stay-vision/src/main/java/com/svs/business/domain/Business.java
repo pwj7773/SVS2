@@ -1,13 +1,19 @@
 package com.svs.business.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import com.svs.member.domain.Member;
+import com.svs.reply.domain.Reply;
 import com.svs.support.BaseEntity;
 
 import lombok.AccessLevel;
@@ -41,4 +47,5 @@ public class Business extends BaseEntity {
 	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"
             , insertable = false, updatable = false)
 	Member member;
+
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.svs.business.api.dto.BusinessRegisterDto.BusinessInsertRequestDto;
 import com.svs.business.domain.Business;
-import com.svs.business.repository.projection.DefaultBusinessProjection.BusinessFindProjection;
+import com.svs.business.domain.Room;
 
 public interface BusinessService {
 
@@ -15,5 +15,13 @@ public interface BusinessService {
 	Business findById(Long id);
 
 	void updateBusiness(BusinessInsertRequestDto dto);
+
+	List<Business> findAllBusiness();
+
+	Business findByBusinessName(String businessName);
+
+	List<Room> findRoom(Long id);
+
+
 
 }
