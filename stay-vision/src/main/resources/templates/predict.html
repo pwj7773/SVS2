@@ -43,8 +43,8 @@
 			success : function(resp) { // resp = {"predict_result" : "setosa"}
 				//$("#result").css("color", "red");
 				//$("#result").text(resp["predict_result"])
-				alert(resp["predict_result"]+"원");
-				
+				$('#result').text(resp["predict_result"] + '원')
+
 			}
 		});
 	}
@@ -81,16 +81,25 @@
 								</select></li>
 								<li class="mb-4"><label for="petalLength">주소</label> <input
 									type="text" id="businessAddressInput" name="address" readonly></li>
-									
+
 								<li class="mb-4"><label for="petalLength">플랫폼</label> <select
 									id="platform" name="platform">
 										<option value="네이버">네이버</option>
 										<option value="떠나요">떠나요</option>
 								</select></li>
-								
+
 								<li class="mb-4"><label for="petalLength">숙박기간</label> <input
 									type="text" id="demo" name="demo" placeholder="날짜를 선택하세요"></li>
 							</ul>
+							<div
+								class="prediction-result text-center d-flex align-items-center justify-content-center"
+								id="predictionResult" >
+								<span
+									class="resultLabel col align-items-center justify-content-center"
+									id="resultLabel">계산결과:</span> <span
+									class="col-7 align-items-center" id="result"></span>
+							</div>
+
 						</div>
 						<div class="card-footer text-body-secondary text-center">
 							<input type="button" class="btn btn-primary" id="btn"

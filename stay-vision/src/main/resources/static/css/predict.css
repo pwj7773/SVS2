@@ -3,10 +3,9 @@
 	margin: 0px auto;
 	box-sizing: border-box;
 	border: 1px solid black;
-	
 }
 
-.card-header{
+.card-header {
 	font-size: 25px;
 	font-weight: 900;
 }
@@ -33,3 +32,16 @@ input, select {
 	width: 60%
 }
 
+#result, .resultLabel {
+	font-size: 20px;
+	display: none;
+}
+
+.resultLabel {
+	line-height: 70px;
+}
+
+.prediction-result {
+	height: 70px;
+	display: none;
+}
