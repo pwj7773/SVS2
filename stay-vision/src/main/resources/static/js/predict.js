@@ -133,3 +133,16 @@ $('input[name="demo2"]').on('cancel.daterangepicker', function(ev, picker) {
 });
 // 두 번째 월 선택 옵션을 숨김
 $('.drp-calendar.right').hide();
+
+
+// 버튼 클릭 이벤트 핸들러
+document.getElementById("btn").addEventListener("click", function() {
+	var resultElement = document.getElementById("result");
+	var resultLabelElement = document.getElementById("resultLabel");
+	
+	resultElement.style.display = "inline-block"; // 내용 표시
+	resultLabelElement.style.display = "inline-block"; // 내용 표시
+	
+});
+
+
