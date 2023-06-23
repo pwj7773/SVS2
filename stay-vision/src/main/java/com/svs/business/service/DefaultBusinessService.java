@@ -48,7 +48,6 @@ public final class DefaultBusinessService implements BusinessService {
 		Business business = Business.builder()
 				.businessName(dto.businessName())
 				.businessAddress(dto.businessAddress())
-				.totalRoom(dto.totalRoom())
 				.phone(dto.phone())
 				.userId(userId)
 				.build();
@@ -68,7 +67,6 @@ public final class DefaultBusinessService implements BusinessService {
 		business.setBusinessAddress(dto.businessAddress());
 		business.setBusinessName(dto.businessName());
 		business.setPhone(dto.phone());
-		business.setTotalRoom(dto.totalRoom());
 		businessRepository.save(business);
 	}
 
