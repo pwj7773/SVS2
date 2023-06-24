@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.svs.business.api.dto.BusinessRegisterDto.BusinessInsertRequestDto;
 import com.svs.business.domain.Business;
-import com.svs.business.domain.Room;
+import com.svs.room.domain.Room;
 
 public interface BusinessService {
 
@@ -20,7 +20,7 @@ public interface BusinessService {
 
 	Business findByBusinessName(String businessName);
 
-	List<Room> findRoom(Long id);
+
 
 
 

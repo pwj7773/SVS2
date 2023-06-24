@@ -1,4 +1,4 @@
-package com.svs.business.domain;
+package com.svs.room.domain;
 
 
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
-@Table(name = "ROOMS", schema = "svs")
+@Table(name = "ROOM", schema = "svs")
 public class Room extends BaseEntity {
 
 	@Column(name = "BUSINESS_NUM")
@@ -30,4 +30,9 @@ public class Room extends BaseEntity {
 
     @Column(name = "ROOM_NAME")
     String roomName;
+    
+    @Column(name= "MAX_PERSON")
+    String maxPerson;
+    @Column(name = "ROOM_INFO")
+    String roomInfo;
 }

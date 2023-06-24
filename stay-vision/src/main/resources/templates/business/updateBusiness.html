@@ -12,7 +12,6 @@
 		let nameValue = document.getElementById("name").value;
 		let businessName = document.getElementById("businessName").value;
 		let businessAddress = document.getElementById("businessAddress").value;
-		let totalRoom = document.getElementById("totalRoom").value;
 		let phone = document.getElementById("phone").value;
 		
 		if (nameValue === '') {
@@ -36,12 +35,6 @@
 		if (businessAddress === '') {
 			alert("주소가 비어있습니다.");
 			document.getElementById("businessAddress").focus(); 
-			return false;
-		}
-		
-		if (totalRoom <1) {
-			alert("잘못된 객실 수 입니다.");
-			document.getElementById("totalRoom").focus(); 
 			return false;
 		}
 		
@@ -111,12 +104,6 @@
 					    </div>
 					</div>
 				
-					<div class="row mb-3">
-					    <label for="totalRoom" class="col-md-4 col-lg-3 col-form-label">객실 수</label>
-					    <div class="col-md-8 col-lg-9">
-					    	<input name="totalRoom" type="number" class="form-control" id="totalRoom" th:value="${business.totalRoom}">
-					    </div>
-					</div>
 					
 					<div class="row mb-3">
 					    <label for="phone" class="col-md-4 col-lg-3 col-form-label">전화번호</label>

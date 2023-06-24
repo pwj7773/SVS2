@@ -33,8 +33,6 @@ public class Business extends BaseEntity {
 	String businessName;
 	@Column(name="BUSINESS_ADDRESS")
 	String businessAddress;
-	@Column(name="TOTAL_ROOM")
-	int totalRoom;
 	@Column(name="PHONE")
 	String phone;
 	@Column(name="USER_ID")
