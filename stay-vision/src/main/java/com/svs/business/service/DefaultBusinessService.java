@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.svs.business.api.dto.BusinessRegisterDto.BusinessInsertRequestDto;
 import com.svs.business.domain.Business;
-import com.svs.business.domain.Room;
 import com.svs.business.repository.BusinessRepository;
-import com.svs.business.repository.RoomRepository;
+import com.svs.room.domain.Room;
+import com.svs.room.repository.RoomRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 public final class DefaultBusinessService implements BusinessService {
 	
 	private final BusinessRepository businessRepository;
-	private final RoomRepository roomRepository;
 	
 	@Override
 	public List<Business> findAllBusiness(String category, String keyword) {
@@ -79,11 +78,5 @@ public final class DefaultBusinessService implements BusinessService {
 	public Business findByBusinessName(String businessName) {
 		return businessRepository.findByBusinessName(businessName);
 	}
-
-	@Override
-	public List<Room> findRoom(Long id) {
-		return roomRepository.findBybusinessNum(id);
-	}
-
 
 }

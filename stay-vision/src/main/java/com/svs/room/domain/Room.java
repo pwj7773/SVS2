@@ -1,4 +1,4 @@
-package com.svs.business.domain;
+package com.svs.room.domain;
 
 
 import javax.persistence.Column;
