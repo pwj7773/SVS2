@@ -3,6 +3,8 @@ package com.svs.business.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +50,7 @@ public class BusinessApi {
 	
 	// 숙박업소 정보 추가
 	@PostMapping("/insertBusiness")
-	public String insertBusiness(BusinessInsertRequestDto dto, @AuthenticationPrincipal Member member) {
+	public String insertBusiness(@Valid BusinessInsertRequestDto dto, @AuthenticationPrincipal Member member) {
 		// 시큐리티에서 사용자 id를 가져옴
 		businessService.insert(dto,member.getUserId());
 		
