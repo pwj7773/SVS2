@@ -111,7 +111,7 @@ $('#demo').daterangepicker({
 	"endDate": new Date(),
 	"drops": "auto",
 	"maxSpan": {
-		"days": 3
+		"days": 2
 	},
 	"showDropdowns": false,
 	"showWeekNumbers": false,
@@ -131,8 +131,7 @@ $('input[name="demo2"]').on('cancel.daterangepicker', function(ev, picker) {
 $('input[name="demo2"]').on('cancel.daterangepicker', function(ev, picker) {
 	$(this).val('');
 });
-// 두 번째 월 선택 옵션을 숨김
-$('.drp-calendar.right').hide();
+
 
 
 // 버튼 클릭 이벤트 핸들러
