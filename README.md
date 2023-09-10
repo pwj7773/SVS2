@@ -12,8 +12,7 @@
 
 개발환경 및 기술
 
-![image](https://github.com/pwj7773/SVS2/assets/129372470/cb3ec695-5ab4-4321-bb14-db69cbf0939f)
-
+![개발 환경 및 기술](https://github.com/pwj7773/SVS2/assets/129372470/41b3a03a-a39f-41cf-9abf-f176a3df2689)
 
 
 시연
